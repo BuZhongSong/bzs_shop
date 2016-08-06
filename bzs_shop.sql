@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-08-05 18:38:30
+Date: 2016-08-06 18:43:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `abon_category`;
 CREATE TABLE `abon_category` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL COMMENT '名称',
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   `preview` varchar(100) DEFAULT NULL COMMENT '预览图',
@@ -60,7 +60,7 @@ INSERT INTO `abon_member` VALUES ('3', '好奇怪哦', '', '', '2016-08-05 17:49
 -- ----------------------------
 DROP TABLE IF EXISTS `abon_product`;
 CREATE TABLE `abon_product` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL COMMENT '名称',
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   `preview` varchar(100) DEFAULT NULL COMMENT '预览图',
@@ -79,7 +79,7 @@ CREATE TABLE `abon_product` (
 -- ----------------------------
 DROP TABLE IF EXISTS `abon_product_content`;
 CREATE TABLE `abon_product_content` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(20000) DEFAULT NULL COMMENT '商品内容',
   `product_id` int(11) DEFAULT NULL COMMENT '商品id',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -96,7 +96,7 @@ CREATE TABLE `abon_product_content` (
 -- ----------------------------
 DROP TABLE IF EXISTS `abon_product_images`;
 CREATE TABLE `abon_product_images` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image_path` varchar(200) DEFAULT NULL COMMENT '图片路径',
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   `product_id` int(11) NOT NULL COMMENT '商品id',
@@ -107,4 +107,20 @@ CREATE TABLE `abon_product_images` (
 
 -- ----------------------------
 -- Records of abon_product_images
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for abon_temp_phone
+-- ----------------------------
+DROP TABLE IF EXISTS `abon_temp_phone`;
+CREATE TABLE `abon_temp_phone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone` varchar(11) NOT NULL COMMENT '手机号码',
+  `code` int(6) NOT NULL COMMENT '验证码',
+  `deadline` timestamp NULL DEFAULT NULL COMMENT '有限期',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=gbk;
+
+-- ----------------------------
+-- Records of abon_temp_phone
 -- ----------------------------
