@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Tool\SMS\message\top;
 class HttpdnsGetRequest
 {
 	private $apiParas = array();

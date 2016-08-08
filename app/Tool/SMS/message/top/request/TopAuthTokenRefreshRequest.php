@@ -1,4 +1,5 @@
 <?php
+namespace App\Tool\SMS\message\top\request;
 /**
  * TOP API: taobao.top.auth.token.refresh request
  * 

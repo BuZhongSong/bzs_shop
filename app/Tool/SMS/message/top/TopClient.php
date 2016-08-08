@@ -1,4 +1,5 @@
 <?php
+namespace App\Tool\SMS\message\top;
 class TopClient
 {
 	public $appkey;

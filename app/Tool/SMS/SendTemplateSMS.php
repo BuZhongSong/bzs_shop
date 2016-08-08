@@ -1,7 +1,8 @@
 <?php
-
 namespace App\Tool\SMS;
-
+include "/message/TopSdk.php";
+use App\Tool\SMS\message\top\TopClient;
+use App\Tool\SMS\message\top\request\AlibabaAliqinFcSmsNumSendRequest;
 /**
 * 短信类
 */
@@ -10,15 +11,16 @@ class SendTemplateSMS
     private $appkey = '23338679';// 可替换为您的沙箱环境应用的AppKey
     private $secretKey = '86cab9804701d5a98079de6c77b0653d'; // 可替换为您的沙箱环境应用的AppSecret
     private $c;
+    private $req;
 
 	public function __construct()
-	{
-		/*$c = new TopClient;
-		$c->appkey = $this->appkey; // 可替换为您的沙箱环境应用的AppKey
-		$c->secretKey = $this->secretKey; // 可替换为您的沙箱环境应用的AppSecret
-		$this->c = $c;*/
+	{ 
+		$this->c = new TopClient;
+		$this->c->appkey = $this->appkey;
+		$this->c->secretKey = $this->secretKey;
+		$this->req= new AlibabaAliqinFcSmsNumSendRequest;
 	}
-	private function random($length, $numeric = 0)
+	public function random($length, $numeric = 0)
 	{
 		PHP_VERSION < '4.2.0' && mt_srand((double)microtime() * 1000000);
 		if($numeric)
@@ -39,17 +41,14 @@ class SendTemplateSMS
 	}
 
 	//发送函数
-	private function sendmessage($Type='normal', $FreeSignName,$Param,$RecNum,$TemplateCode)
+	public function sendMessage($Type='normal', $FreeSignName,$Param,$RecNum,$TemplateCode)
 	{
-		echo "fcuk";die;
-		/*$req = new AlibabaAliqinFcSmsNumSendRequest;
-		$req->setExtend($Extend);
-		$req->setSmsType($Type);
-		$req->setSmsFreeSignName($FreeSignName);
-		$req->setSmsParam($Param);
-		$req->setRecNum($RecNum);
-		$req->setSmsTemplateCode($TemplateCode);
-		$resp = $this->c->execute($req);
-		return $resp;*/
+		$this->req->setSmsType($Type);
+		$this->req->setSmsFreeSignName($FreeSignName);
+		$this->req->setSmsParam($Param);
+		$this->req->setRecNum($RecNum);
+		$this->req->setSmsTemplateCode($TemplateCode);
+		$resp = $this->c->execute($this->req);
+		return $resp;
 	}
 }

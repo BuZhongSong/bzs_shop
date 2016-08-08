@@ -1,4 +1,5 @@
 <?php
+namespace App\Tool\SMS\message\top\request;
 /**
  * TOP API: alibaba.aliqin.fc.tts.num.singlecall request
  * 

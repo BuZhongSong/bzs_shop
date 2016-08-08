@@ -1,4 +1,5 @@
 <?php
+namespace App\Tool\SMS\message\top;
 /**
  * 返回的默认类
  * 
