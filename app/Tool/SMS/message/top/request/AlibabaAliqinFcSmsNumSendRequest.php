@@ -1,6 +1,4 @@
 <?php
-namespace App\Tool\SMS\message\top\request;
-use App\Tool\SMS\message\top\RequestCheckUtil;
 /**
  * TOP API: alibaba.aliqin.fc.sms.num.send request
  * 
@@ -119,6 +117,7 @@ class AlibabaAliqinFcSmsNumSendRequest
 	
 	public function check()
 	{
+		
 		RequestCheckUtil::checkNotNull($this->recNum,"recNum");
 		RequestCheckUtil::checkNotNull($this->smsFreeSignName,"smsFreeSignName");
 		RequestCheckUtil::checkNotNull($this->smsTemplateCode,"smsTemplateCode");

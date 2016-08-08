@@ -1,5 +1,4 @@
 <?php
-namespace App\Tool\SMS\message\top;
 class TopLogger
 {
 	public $conf = array(

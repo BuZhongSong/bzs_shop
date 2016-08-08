@@ -1,5 +1,4 @@
 <?php
-namespace App\Tool\SMS\message\top\request;
 /**
  * TOP API: taobao.kfc.keyword.search request
  * 

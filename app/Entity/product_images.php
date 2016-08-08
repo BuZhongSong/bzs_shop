@@ -4,13 +4,13 @@ namespace App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductContent extends Model{
+class Member extends Model{
 	/**
      * 关联到模型的数据表
      *
      * @var string
      */
-    protected $table = 'abon_product_content';
+    protected $table = 'abon_product_images';
     protected $primaryKey = 'id';
     //
 }
