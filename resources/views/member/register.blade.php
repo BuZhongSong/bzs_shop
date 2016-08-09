@@ -109,7 +109,7 @@
   });
 
   $('.bk_validate_code').click(function () {
-    $(this).attr('src', '/service/validate/create?random=' + Math.random());
+    $(this).attr('src', '/service/validate_code/create?random=' + Math.random());
   });
 
 </script>
@@ -288,9 +288,9 @@
       setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       return false;
     }
-    if(phone_code.length != 6) {
+    if(phone_code.length != 5) {
       $('.bk_toptips').show();
-      $('.bk_toptips span').html('手机验证码为6位!');
+      $('.bk_toptips span').html('手机验证码为5位!');
       setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       return false;
     }

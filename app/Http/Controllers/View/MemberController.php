@@ -8,11 +8,11 @@ class MemberController extends Controller
 {
    public function toLogin()
    {
-       return view('login');
+       return view('member.login');
    }
 
    public function toRegister()
    {
-       return view('register');
+       return view('member.register');
    }
 }
