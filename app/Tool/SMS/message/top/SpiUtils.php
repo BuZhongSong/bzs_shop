@@ -1,4 +1,5 @@
 <?php
+namespace App\Tool\SMS\message\top;
 class SpiUtils{
 	private static $top_sign_list = "HTTP_TOP_SIGN_LIST";
 	private static $timestamp = "timestamp";
