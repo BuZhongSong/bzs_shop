@@ -48,9 +48,9 @@ class MemberController extends Controller
     }
     /*手机号注册*/
     if($phone!=''){
-      if($phone_code == '' || strlen($phone_code) != 5){
+      if($phone_code == '' || strlen($phone_code) != 6){
         $m3_result->status = 5;
-        $m3_result->message = '手机验证码为5位';
+        $m3_result->message = '手机验证码为6位';
         return $m3_result->toJson();
       }
       $tempPhone = TempPhone::where('phone',$phone)->first();
@@ -68,9 +68,7 @@ class MemberController extends Controller
         $member->password_salt = $salt;
         $member->password = md5($salt.$password);
         $member->save();
-        $m3_result->status = 0;
-        $m3_result->message = '注册成功';
-        return $m3_result->toJson();
+
       }else{
         $m3_result->status = 7;
         $m3_result->message = '手机验证码不正确';
@@ -118,12 +116,71 @@ class MemberController extends Controller
             ->subject($m3_email->subject);
       });
 
-      $m3_result->status = 0;
-      $m3_result->message = '注册成功';
-      return $m3_result->toJson();
     }
-    
-
+    $m3_result->status = 0;
+    $m3_result->message = '注册成功';
+    return $m3_result->toJson();
    }
 
+   public function login(Request $request)
+   {
+     $username = $request->input('username', '');
+     $password = $request->input('password', '');
+     $validate_code = $request->input('validate_code', '');
+     $validate_code_session = $request->session()->get('validate_code', '');
+     $m3_result = new M3Result;//实例化返回数据
+     /*校验*/
+     /*判断*/
+     if($validate_code_session != $validate_code){
+       $m3_result->status = 1;
+       $m3_result->message = '验证码不正确';
+       return $m3_result->toJson();
+     }
+     if(strpos($username, '@') == true){
+       $member = Member::where('email',$username)->first();
+     }else{
+       $member = Member::where('phone',$username)->first();
+     }
+     if($member == null){
+        $m3_result->status = 2;
+        $m3_result->message = '该用户不存在';
+        return $m3_result->toJson();
+     }else{
+       $password = md5($member->password_salt.$password);
+       if($password != $member->password){
+        $m3_result->status = 3;
+        $m3_result->message = '用户名或密码错误';
+        return $m3_result->toJson();
+      }
+      $request->session()->put('member',$member);
+      $m3_result->status = 0;
+      $m3_result->message = '登录成功';
+      return $m3_result->toJson();
+    }
+   }
+
+   /*邮箱验证*/
+   public function validateEmail(Request $request)
+   {
+     $member_id = $request->input('member_id','');
+     $code = $request->input('code','');
+     if($member_id == '' || $code == ''){
+      return '验证异常';
+     }
+     $tempEmail = TempEmail::where('member_id',$member_id)->first();
+     if($tempEmail == null){
+      return '验证异常';
+     }
+     if($tempEmail->code == $code){
+      if(time() > strtotime($tempEmail->deadline)){
+        return '该链接已经失效';
+      }
+      $member = Member::find($member_id);
+      $member->active = 1;
+      $member->save();
+      return redirect('/login');
+     }else{
+      return '该链接已经失效';
+     }
+   }
 }

@@ -12,5 +12,10 @@ class Member extends Model{
      */
     protected $table = 'abon_member';
     protected $primaryKey = 'id';
-    //
+    
+    /*验证电话号码*/
+   /* public function checkPhone($phone)
+    {
+    	# code...
+    }*/
 }

@@ -31,7 +31,7 @@ class ValidateController extends Controller
       return $m3_result->toJson();
     }
     $SendTemplateSMS = new SendTemplateSMS;
-    $code = $SendTemplateSMS->random(5,1);//生成随机数字验证码
+    $code = $SendTemplateSMS->random(6,1);//生成随机数字验证码
     $re = $SendTemplateSMS->sendMessage("normal","注册验证","{\"code\":\"$code\",\"product\":\"会员\"}",$phone,"SMS_6691238");//发送短信
     $result = $re->result;
     if($result->success){

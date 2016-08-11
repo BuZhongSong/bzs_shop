@@ -152,10 +152,11 @@
     }, 1000);
 
     $.ajax({
+      type: "POST",
       url: '/service/validate_phone/send',
       dataType: 'json',
       cache: false,
-      data: {phone: phone},
+      data: {phone: phone, _token: "{{csrf_token()}}"},
       success: function(data) {
         if(data == null) {
           $('.bk_toptips').show();
@@ -288,9 +289,9 @@
       setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       return false;
     }
-    if(phone_code.length != 5) {
+    if(phone_code.length != 6) {
       $('.bk_toptips').show();
-      $('.bk_toptips span').html('手机验证码为5位!');
+      $('.bk_toptips span').html('手机验证码为6位!');
       setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       return false;
     }

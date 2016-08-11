@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model{
+class Category extends Model{
 	/**
      * 关联到模型的数据表
      *

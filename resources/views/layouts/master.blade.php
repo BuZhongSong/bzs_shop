@@ -3,20 +3,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-        <title>bzs_shop- @yield('title')</title>
+        <title>@yield('title')</title>
         <link rel="stylesheet" href="/css/weui.css">
         <link rel="stylesheet" href="/css/book.css">
     </head>
     <body>
+        <div class="bk_title_bar">
+            <img class="bk_back" src="/images/back.png" onclick="history.go(-1)">
+            <p class="bk_title_content">@yield('title')</p>
+            <img class="bk_menu" src="/images/menu.png" onclick="onMenuClick();">
+        </div>
         <div class="page">
           @yield('content')
         </div>
         <!-- tooltips -->
         <div class="bk_toptips"><span></span></div>
-
-        <div id="global_menu" onclick="onMenuClick();">
-          <div></div>
-        </div>
 
         <!--BEGIN actionSheet-->
         <div id="actionSheet_wrap">
