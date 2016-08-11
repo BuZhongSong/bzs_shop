@@ -18,11 +18,6 @@
     </a>
 @endforeach
 </div>
-<div class="bk_title_bar addcart">
-    <img class="bk_back" src="/images/back.png" onclick="history.go(-1)">
-    <p class="bk_title_content">@yield('title')</p>
-    <img class="bk_menu" src="/images/menu.png" onclick="onMenuClick();">
-</div>
 @endsection
 
 @section('my-js')
