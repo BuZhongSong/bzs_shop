@@ -38,7 +38,7 @@
 		<button class="weui_btn weui_btn_primary" onclick="addToCart();">加入购物车</button>
 	</div>
     <div class="bk_half_are">
-    	<button class="weui_btn weui_btn_default" href="javascript:;">结算(<span id="cart_num" class="m3price">5</span>)</button>
+    	<button class="weui_btn weui_btn_default" href="javascript:;">结算(<span id="cart_num" class="m3price">{{$count}}</span>)</button>
 	</div>
 </div>
 @endsection
@@ -61,7 +61,36 @@
 	})
 
 	function addToCart(argument) {
-		// body...
+	    var product_id = "{{$product->id}}";
+	    $.ajax({
+	      type: "get",
+	      url: '/service/cart/add/' + product_id,
+	      dataType: 'json',
+	      cache: false,
+	      success: function(data) {
+	        if(data == null) {
+	          $('.bk_toptips').show();
+	          $('.bk_toptips span').html('服务端错误');
+	          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+	          return;
+	        }
+	        if(data.status != 0) {
+	          $('.bk_toptips').show();
+	          $('.bk_toptips span').html(data.message);
+	          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+	          return;
+	        }
+
+	        var num = $('#cart_num').html();
+	        if(num == '') num = 0;
+	        $('#cart_num').html(Number(num) + 1);
+	      },
+	      error: function(xhr, status, error) {
+	        console.log(xhr);
+	        console.log(status);
+	        console.log(error);
+	      }
+	    });
 	}
 </script>
 @endsection

@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () {
 			Route::post('/service/register', 'Service\MemberController@register');
 			/*邮箱验证与账号激活*/
 			Route::any('/service/validate_email', 'Service\MemberController@validateEmail');
-		/*会员*/		
+		/*会员*/
 	/*----service----*/
 
 /*用户模块-----------------------------------------------------------------------------*/
@@ -49,6 +49,11 @@ Route::group(['middleware' => ['web']], function () {
 		/*商品类别*/
 	/*----service----*/
 
+	/*----购物车----*/
+		Route::get('/service/cart/add/{product_id}', 'Service\CartController@addToCart');
+	/*----购物车----*/
 /*商品模块-----------------------------------------------------------------------------*/
+
+
 
 });
