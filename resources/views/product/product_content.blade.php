@@ -35,10 +35,10 @@
 </div>
 <div class="bk_fix_bottom">
 	<div class="bk_half_are">
-		<button class="weui_btn weui_btn_primary" onclick="addToCart();">加入购物车</button>
+		<button class="weui_btn weui_btn_primary" onclick="_add_ToCart();">加入购物车</button>
 	</div>
     <div class="bk_half_are">
-    	<button class="weui_btn weui_btn_default" href="javascript:;">结算(<span id="cart_num" class="m3price">{{$count}}</span>)</button>
+    	<button class="weui_btn weui_btn_default" onclick="_ToCart();">结算(<span id="cart_num" class="m3price">{{$count}}</span>)</button>
 	</div>
 </div>
 @endsection
@@ -60,7 +60,7 @@
 		mySwiper.swipeNext()
 	})
 
-	function addToCart(argument) {
+	function _add_ToCart(argument) {
 	    var product_id = "{{$product->id}}";
 	    $.ajax({
 	      type: "get",
@@ -91,6 +91,10 @@
 	        console.log(error);
 	      }
 	    });
+	}
+
+	function _ToCart(argument) {
+		location.href = '/cart'
 	}
 </script>
 @endsection

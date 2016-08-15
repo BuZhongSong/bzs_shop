@@ -50,7 +50,7 @@
     username = $('input[name=username]').val();
     password = $('input[name=password]').val();
     validate_code = $('input[name=validate_code]').val();
-    if(verifyUser(username, password, validate_code) == false) {
+    if(_verifyUser(username, password, validate_code) == false) {
       return;
     }
 
@@ -86,7 +86,7 @@
     });
   }
 
-  function verifyUser(username, password, validate_code) {
+  function _verifyUser(username, password, validate_code) {
     // 手机号不为空
     if(username == '') {
       $('.bk_toptips').show();

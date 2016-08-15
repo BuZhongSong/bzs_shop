@@ -17,7 +17,7 @@ class ProductController extends Controller
    {
    	Log::info('进入商品分类列表');//写入日志
    	$categorys = Category::whereNull('parent_id')->get();
-    return view('product.category')->with('categorys',$categorys);
+      return view('product.category')->with('categorys',$categorys);
    }
 
    /*商品列表*/
@@ -33,9 +33,9 @@ class ProductController extends Controller
    {
       Log::info('进入商品列表');//写入日志
       /*商品信息*/
-   	$product = Product::find($product_id);
-   	$p_content = ProductContent::where('product_id',$product_id)->first();
-   	$p_images = ProductImages::where('product_id',$product_id)->get();
+      $product = Product::find($product_id);
+      $p_content = ProductContent::where('product_id',$product_id)->first();
+      $p_images = ProductImages::where('product_id',$product_id)->get();
       /*购物车信息*/
       $shop_cart = $request->cookie('shop_cart');
       $shop_cart_arr = $shop_cart!= null ? explode(',', $shop_cart) : array();
@@ -43,13 +43,13 @@ class ProductController extends Controller
       foreach ($shop_cart_arr as $value) {
          $index = strpos($value, ':');
          if(substr($value, 0, $index) == $product_id){
-            $count = ((int) substr($value, $index+1));
+            $count = (int) substr($value, $index+1);
             break;
          }
       }
-   	return view('product.product_content')->with('product',$product)
-   										  ->with('p_content',$p_content)
-   										  ->with('p_images',$p_images)
+      return view('product.product_content')->with('product',$product)
+      									  ->with('p_content',$p_content)
+      									  ->with('p_images',$p_images)
                                    ->with('count',$count);
    }
 

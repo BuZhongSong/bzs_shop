@@ -84,7 +84,7 @@
 </div>
 <div class="weui_cells_tips"></div>
 <div class="weui_btn_area">
-  <a class="weui_btn weui_btn_primary" href="javascript:" onclick="onRegisterClick();">注册</a>
+  <a class="weui_btn weui_btn_primary" href="javascript:" onclick="_onRegisterClick();">注册</a>
 </div>
 <a href="/login" class="bk_bottom_tips bk_important">已有帐号? 去登录</a>
 @endsection
@@ -185,7 +185,7 @@
 </script>
 <script type="text/javascript">
 
-  function onRegisterClick() {
+  function _onRegisterClick() {
 
     $('input:radio[name=register_type]').each(function(index, el) {
       if($(this).attr('checked') == 'checked') {

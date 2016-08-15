@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
 	/*----view-----*/
 		/*商品分类列表*/
 		Route::get('/category', 'View\ProductController@toCategory');
-		/*商品分类列表*/
+		/*商品列表*/
 		Route::get('/product/category_id/{category_id}', 'View\ProductController@toProduct');
 		/*商品详情*/
 		Route::get('/product/{product_id}', 'View\ProductController@toProductContent');
@@ -46,14 +46,26 @@ Route::group(['middleware' => ['web']], function () {
 	/*----service----*/
 		/*商品类别*/
 		Route::get('/service/category/parent_id/{parent_id}', 'Service\ProductController@getCategoryByParentId');
-		/*商品类别*/
+
 	/*----service----*/
 
-	/*----购物车----*/
-		Route::get('/service/cart/add/{product_id}', 'Service\CartController@addToCart');
-	/*----购物车----*/
 /*商品模块-----------------------------------------------------------------------------*/
 
+/*购物车-----------------------------------------------------------------------------*/
+	/*----service----*/
+		/*添加商品到购物车*/
+		Route::get('/service/cart/add/{product_id}', 'Service\CartController@addToCart');
+		/*删除购物车商品*/
+		Route::get('/service/cart/del', 'Service\CartController@deleteCart');
+	/*----service----*/
 
+	/*----view-----*/
+		/*购物车页面*/ 
+		Route::get('/cart', 'View\CartController@toCart');
+	/*----view-----*/
+/*购物车-----------------------------------------------------------------------------*/
 
+	Route::group(['middleware' => ['checkLogin']], function () {
+		
+	});
 });
