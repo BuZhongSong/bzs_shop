@@ -63,9 +63,12 @@ Route::group(['middleware' => ['web']], function () {
 		/*购物车页面*/ 
 		Route::get('/cart', 'View\CartController@toCart');
 	/*----view-----*/
-/*购物车-----------------------------------------------------------------------------*/
-
+	/*购物车-----------------------------------------------------------------------------*/
+	/*验证是否登录中间组*/
 	Route::group(['middleware' => ['checkLogin']], function () {
-		
+		/*----view-----*/
+		/*结算页面*/ 
+			Route::get('/order_pay', 'View\OrderController@toOrderPay');
+		/*----view-----*/
 	});
 });

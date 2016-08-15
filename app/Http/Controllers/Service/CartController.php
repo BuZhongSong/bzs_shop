@@ -5,15 +5,23 @@ namespace App\Http\Controllers\Service;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Entity\Product;
+use App\Entity\Member;
+use App\Entity\CartItem;
 use App\Models\M3Result;
 
 class CartController extends Controller
 {
+   public function __construct(Request $request)
+   {
+      $Member = new Member;
+      $this->member = $Member->getMember($request);
+      $this->member_id = $this->member['id'];
+   }
    /*添加商品到购物车*/
    public function addToCart(Request $request,$product_id)
-   {
-   	$shop_cart = $request->cookie('shop_cart');
-   	$shop_cart_arr = $shop_cart!= null ? explode(',', $shop_cart) : array();
+   {  
+      $cartItem = new CartItem;
+      $shop_cart_arr = $cartItem->getCart($request);
       $count = 1;
    	foreach ($shop_cart_arr as &$value) {
          $index = strpos($value, ':');
@@ -29,6 +37,12 @@ class CartController extends Controller
       $m3_result = new M3Result;//实例化返回数据
    	$m3_result->status = 0;
    	$m3_result->message = '添加成功';
+      /*同步购物车*/
+      if($this->member['id']) {
+         $cartItem = new CartItem;
+         $cartItem->syncCart($request,$shop_cart_arr,$this->member_id);
+      }
+      
    	return response($m3_result->toJson())->withcookie('shop_cart', implode(',', $shop_cart_arr));
    }
 

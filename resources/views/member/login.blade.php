@@ -10,13 +10,13 @@
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">帐号</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="tel" name="username" placeholder="邮箱或手机号"/>
+          <input class="weui_input" type="text" name="username" placeholder="邮箱或手机号"/>
       </div>
   </div>
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="tel" name="password" placeholder="不少于6位"/>
+          <input class="weui_input" type="password" name="password" placeholder="不少于6位"/>
       </div>
   </div>
   <div class="weui_cell weui_vcode">
@@ -77,6 +77,7 @@
         $('.bk_toptips').show();
         $('.bk_toptips span').html('登录成功');
         setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+        location.href = "{{$return_url}}";
       },
       error: function(xhr, status, error) {
         console.log(xhr);

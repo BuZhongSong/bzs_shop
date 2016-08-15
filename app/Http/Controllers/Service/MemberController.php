@@ -15,6 +15,7 @@ use Mail;
 
 class MemberController extends Controller
 {
+
    /*注册处理*/
    public function register(Request $request)
    {

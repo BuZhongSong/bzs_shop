@@ -5,26 +5,15 @@ namespace App\Http\Controllers\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Entity\Product;
-use App\Entity\Member;
 use App\Entity\CartItem;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
-   public function __construct(Request $request)
-   {
-   		$Member = new Member;
-   	 	$this->member = $Member->getMember($request);
-        $this->member_id = $this->member['id'];
-   }
-
    public function toCart(Request $request)
    {
    	$cart_items = array();
-	/*同步购物车*/
-	$cartItem = new CartItem;
-	$shop_cart_arr = $cartItem->getCart($request);
-	$cartItem->syncCart($request,$shop_cart_arr,$this->member_id);
-
+	$shop_cart = $request->cookie('shop_cart');
+	$shop_cart_arr = $shop_cart!= null ? explode(',', $shop_cart) : array();
 	$count = 1;
 	foreach ($shop_cart_arr as $key => $value) {
 	 	$index = strpos($value, ':');
@@ -38,6 +27,11 @@ class CartController extends Controller
 	 	}
 	}
 	return view('cart.cart')->with('cart_items',$cart_items);
+   }
+
+   public function toOrderPay(Request $request)
+   {
+   	return view('order.order_pay');
    }
 
 }
